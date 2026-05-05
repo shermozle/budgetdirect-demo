@@ -14,6 +14,7 @@ import AccountDashboard from './pages/AccountDashboard';
 import Notifications from './pages/Notifications';
 import HelpSupport from './pages/HelpSupport';
 import ResumeQuote from './pages/ResumeQuote';
+import CarInsuranceLanding from './pages/CarInsuranceLanding';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/account" element={<AccountDashboard />} />
             <Route path="/account/notifications" element={<Notifications />} />
             <Route path="/help" element={<HelpSupport />} />
+            <Route path="/landing" element={<CarInsuranceLanding />} />
           </Routes>
         </main>
         <Footer />
