@@ -75,6 +75,15 @@ export default function QuoteCover() {
     }
   };
 
+  const handleSelectCover = (idx: number) => {
+    setSelectedCover(idx);
+    const tier = coverTiers[idx];
+    amplitude.track('Select Cover Options', {
+      'Cover Type': tier.name,
+      'Policy Tier': tier.tier,
+    });
+  };
+
   const handleContinue = () => {
     const tier = coverTiers[selectedCover];
     updateQuote({
@@ -82,10 +91,6 @@ export default function QuoteCover() {
       policyTier: tier.tier,
       excess,
       extras: selectedExtras,
-    });
-    amplitude.track('Select Cover Options', {
-      'Cover Type': tier.name,
-      'Policy Tier': tier.tier,
     });
     navigate('/quote/review');
   };
@@ -108,7 +113,7 @@ export default function QuoteCover() {
             cursor: 'pointer',
             position: 'relative',
             padding: '1.5rem',
-          }} onClick={() => setSelectedCover(i)}>
+          }} onClick={() => handleSelectCover(i)}>
             {tier.popular && (
               <div style={{
                 position: 'absolute',
