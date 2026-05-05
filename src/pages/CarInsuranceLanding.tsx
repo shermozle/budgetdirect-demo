@@ -10,6 +10,15 @@ const BD_RED = '#E30613';
 const BD_NAVY = '#001E62';
 const BD_YELLOW = '#FFC72C';
 
+// Unsplash CDN — free to use, no auth required
+const UNSPLASH = {
+  heroHero: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80&auto=format&fit=crop',   // red sports car
+  familyCar: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=600&q=80&auto=format&fit=crop',    // family car lifestyle
+  cityDrive: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=600&q=80&auto=format&fit=crop', // car on city road
+  roadTrip:  'https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600&q=80&auto=format&fit=crop', // road trip / open road
+  claimsPerson: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80&auto=format&fit=crop', // professional / advisor
+};
+
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const awards = [
@@ -348,69 +357,67 @@ export default function CarInsuranceLanding() {
           </div>
 
           {/* Right card */}
-          <div style={{
-            background: `linear-gradient(145deg, ${BD_NAVY} 0%, #0a2a7a 100%)`,
-            borderRadius: 20,
-            padding: '2rem',
-            color: 'white',
-            boxShadow: '0 24px 64px rgba(0,30,98,0.22)',
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: '1.5rem' }}>
-              <div style={{
-                background: BD_RED, borderRadius: 12,
-                width: 48, height: 48,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <Car size={26} color="white" />
-              </div>
-              <div>
-                <p style={{ fontWeight: 700, fontSize: '1.1rem', margin: 0 }}>Comprehensive Cover</p>
-                <p style={{ fontSize: '0.82rem', opacity: 0.75, margin: 0 }}>Our most popular policy</p>
-              </div>
-            </div>
-
-            {[
-              'Accidental damage to your car',
-              'Theft, fire, storm & hail',
-              'Windscreen repair & replacement',
-              'Up to $20M legal liability',
-              'New car replacement within 2 years',
-              '24/7 claims lodgement',
-            ].map((f) => (
-              <div key={f} style={{
-                display: 'flex', alignItems: 'center', gap: 8,
-                padding: '0.5rem 0',
-                borderBottom: '1px solid rgba(255,255,255,0.08)',
-                fontSize: '0.9rem',
-              }}>
-                <CheckCircle size={16} color={BD_YELLOW} style={{ flexShrink: 0 }} />
-                {f}
-              </div>
-            ))}
-
+          <div style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,30,98,0.22)' }}>
+            {/* Car hero image */}
+            <img
+              src={UNSPLASH.heroHero}
+              alt="Red sports car on open road"
+              style={{ width: '100%', height: 300, objectFit: 'cover', display: 'block' }}
+              loading="eager"
+            />
+            {/* Overlay card */}
             <div style={{
-              marginTop: '1.5rem',
-              background: 'rgba(255,255,255,0.08)',
-              borderRadius: 10,
-              padding: '0.875rem 1rem',
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              background: `linear-gradient(145deg, ${BD_NAVY} 0%, #0a2a7a 100%)`,
+              padding: '1.5rem',
+              color: 'white',
             }}>
-              <span style={{ fontSize: '0.85rem', opacity: 0.8 }}>From as low as</span>
-              <span style={{ fontSize: '1.5rem', fontWeight: 800, color: BD_YELLOW }}>$28/month</span>
-            </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: '1.25rem' }}>
+                <div style={{
+                  background: BD_RED, borderRadius: 12,
+                  width: 44, height: 44,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                }}>
+                  <Car size={22} color="white" />
+                </div>
+                <div>
+                  <p style={{ fontWeight: 700, fontSize: '1rem', margin: 0 }}>Comprehensive Cover</p>
+                  <p style={{ fontSize: '0.78rem', opacity: 0.75, margin: 0 }}>Our most popular policy</p>
+                </div>
+                <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
+                  <p style={{ fontSize: '0.75rem', opacity: 0.7, margin: 0 }}>From</p>
+                  <p style={{ fontSize: '1.4rem', fontWeight: 800, color: BD_YELLOW, margin: 0 }}>$28/mo</p>
+                </div>
+              </div>
 
-            <button
-              className="btn"
-              style={{
-                width: '100%', marginTop: '1rem',
-                background: BD_YELLOW, color: BD_NAVY,
-                fontWeight: 700, fontSize: '1rem',
-                padding: '0.875rem',
-              }}
-              onClick={() => startQuote('hero-card', 'Comprehensive')}
-            >
-              Get My Quote
-            </button>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem', marginBottom: '1.25rem' }}>
+                {[
+                  'Accidental damage',
+                  'Theft, fire & storm',
+                  'Windscreen cover',
+                  '$20M legal liability',
+                  'New car replacement',
+                  '24/7 claims',
+                ].map((f) => (
+                  <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.82rem' }}>
+                    <CheckCircle size={13} color={BD_YELLOW} style={{ flexShrink: 0 }} />
+                    {f}
+                  </div>
+                ))}
+              </div>
+
+              <button
+                className="btn"
+                style={{
+                  width: '100%',
+                  background: BD_YELLOW, color: BD_NAVY,
+                  fontWeight: 700, fontSize: '1rem',
+                  padding: '0.8rem',
+                }}
+                onClick={() => startQuote('hero-card', 'Comprehensive')}
+              >
+                Get My Quote
+              </button>
+            </div>
           </div>
         </div>
 
@@ -493,6 +500,49 @@ export default function CarInsuranceLanding() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Photo Strip ── */}
+      <section style={{ padding: '0', overflow: 'hidden' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', height: 260 }}>
+          <div style={{ position: 'relative', overflow: 'hidden' }}>
+            <img src={UNSPLASH.familyCar} alt="Family getting ready for a road trip"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <div style={{
+              position: 'absolute', bottom: 0, left: 0, right: 0,
+              background: 'linear-gradient(transparent, rgba(0,30,98,0.85))',
+              padding: '1.5rem 1.25rem 1rem',
+              color: 'white',
+            }}>
+              <p style={{ fontWeight: 700, fontSize: '1rem', margin: 0 }}>Cover for every journey</p>
+              <p style={{ fontSize: '0.82rem', opacity: 0.85, margin: '0.2rem 0 0' }}>Whether it's school runs or road trips</p>
+            </div>
+          </div>
+          <div style={{ position: 'relative', overflow: 'hidden' }}>
+            <img src={UNSPLASH.cityDrive} alt="Car driving through city"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <div style={{
+              position: 'absolute', bottom: 0, left: 0, right: 0,
+              background: 'linear-gradient(transparent, rgba(227,6,19,0.85))',
+              padding: '1rem 1rem 0.75rem',
+              color: 'white',
+            }}>
+              <p style={{ fontWeight: 700, fontSize: '0.9rem', margin: 0 }}>City & suburban cover</p>
+            </div>
+          </div>
+          <div style={{ position: 'relative', overflow: 'hidden' }}>
+            <img src={UNSPLASH.roadTrip} alt="Open road Australia"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <div style={{
+              position: 'absolute', bottom: 0, left: 0, right: 0,
+              background: 'linear-gradient(transparent, rgba(0,30,98,0.85))',
+              padding: '1rem 1rem 0.75rem',
+              color: 'white',
+            }}>
+              <p style={{ fontWeight: 700, fontSize: '0.9rem', margin: 0 }}>Australia-wide protection</p>
+            </div>
           </div>
         </div>
       </section>
@@ -675,31 +725,50 @@ export default function CarInsuranceLanding() {
       {/* ── Mid-page CTA ── */}
       <section style={{
         background: `linear-gradient(135deg, ${BD_NAVY} 0%, #0a2a7a 100%)`,
-        padding: '3.5rem 0',
-        textAlign: 'center',
+        padding: '0',
+        overflow: 'hidden',
       }}>
-        <div className="container" style={{ maxWidth: 640 }}>
-          <h2 style={{ color: 'white', fontSize: '1.9rem', fontWeight: 800, marginBottom: '0.75rem' }}>
-            Ready to save on your car insurance?
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.75rem', fontSize: '1.05rem' }}>
-            Get your personalised quote in under 4 minutes. No commitment required.
-          </p>
-          <button
-            className="btn btn-lg"
-            style={{
-              background: BD_YELLOW, color: BD_NAVY,
-              fontWeight: 800, fontSize: '1.1rem',
-              padding: '1rem 2.5rem',
-            }}
-            onClick={() => startQuote('mid-page-cta')}
-          >
-            Get a Free Quote Now
-          </button>
-          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', marginTop: '0.75rem' }}>
-            15% online discount applied automatically at checkout
-          </p>
+        <div className="container" style={{
+          display: 'grid', gridTemplateColumns: '1fr auto',
+          gap: '3rem', alignItems: 'center',
+          padding: '3rem 1.5rem',
+        }}>
+          <div>
+            <h2 style={{ color: 'white', fontSize: '1.9rem', fontWeight: 800, marginBottom: '0.75rem' }}>
+              Ready to save on your car insurance?
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.75rem', fontSize: '1.05rem' }}>
+              Get your personalised quote in under 4 minutes. No commitment required.
+            </p>
+            <button
+              className="btn btn-lg"
+              style={{
+                background: BD_YELLOW, color: BD_NAVY,
+                fontWeight: 800, fontSize: '1.1rem',
+                padding: '1rem 2.5rem',
+              }}
+              onClick={() => startQuote('mid-page-cta')}
+            >
+              Get a Free Quote Now
+            </button>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', marginTop: '0.75rem' }}>
+              15% online discount applied automatically at checkout
+            </p>
+          </div>
+          <div style={{
+            width: 200, height: 260,
+            borderRadius: '120px 120px 0 0',
+            overflow: 'hidden', flexShrink: 0,
+            alignSelf: 'flex-end',
+          }} className="cta-advisor-img">
+            <img
+              src={UNSPLASH.claimsPerson}
+              alt="Friendly Budget Direct advisor"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+            />
+          </div>
         </div>
+        <style>{`@media(max-width:640px){ .cta-advisor-img { display: none !important; } }`}</style>
       </section>
 
       {/* ── FAQ ── */}
